@@ -65,6 +65,9 @@ class AreaCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text('${area.rodovia} • ${area.localizacao}'),
               Text('KM ${area.kmInicial} → ${area.kmFinal}'),
+              Text(
+                'Trecho: KM ${area.kmInicial.toStringAsFixed(1)} até ${area.kmFinal.toStringAsFixed(1)}',
+              ),
               Text('Terreno: ${area.tipoTerreno}'),
               const SizedBox(height: 8),
               Text(

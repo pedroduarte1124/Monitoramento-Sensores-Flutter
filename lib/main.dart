@@ -15,7 +15,7 @@ class VerdeSmartApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'VerdeSmart',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2E7D32)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF00695C)),
         useMaterial3: true,
       ),
       home: const DashboardScreen(),
@@ -67,11 +67,30 @@ class DashboardScreen extends StatelessWidget {
       alturaMedia: 2.40,
       totalMedicoes: 20,
     ),
+    const AreaMonitoramento(
+      id: 4,
+      codigo: 'BR381-KM300',
+      rodovia: 'BR-381',
+      kmInicial: 300,
+      kmFinal: 306,
+      localizacao: 'Governador Valadares / MG',
+      status: StatusVegetacao.atencao,
+      tipoTerreno: 'Serra',
+      densidade: 0.65,
+      alturaMedia: 1.60,
+      totalMedicoes: 10,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     final total = areas.length;
+    final normais = areas
+        .where((a) => a.status == StatusVegetacao.normal)
+        .length;
+    final atencao = areas
+        .where((a) => a.status == StatusVegetacao.atencao)
+        .length;
     final urgentes = areas
         .where((a) => a.status == StatusVegetacao.urgente)
         .length;
@@ -86,7 +105,7 @@ class DashboardScreen extends StatelessWidget {
             color: const Color(0xFFE8F5E9),
             child: Text(
               'Monitoramento de vegetação em rodovias\n'
-              '$total áreas | $urgentes urgente(s)',
+              '$total áreas | $normais normal(is) | $atencao em atenção | $urgentes urgente(s)',
               style: const TextStyle(fontSize: 16, height: 1.4),
             ),
           ),
